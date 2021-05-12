@@ -12,6 +12,9 @@ class TableViewController: UIViewController {
     private let datas = [
         "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:",
         "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below: The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:",
+        "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:",
+        "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:",
+        "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below: The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:",
         "The entry point of our App is the file AppDelegate.swift let’s go there and reduce the noise by deleting all functions except the one you see down below:"
     ]
     
@@ -22,6 +25,7 @@ class TableViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(TableViewCell.self , forCellReuseIdentifier: cellID)
         tableView.dataSource = self
+        tableView.delegate = self
         return tableView
     }()
 
@@ -29,6 +33,15 @@ class TableViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         tableView.reloadData()
+        
+        
+        // MARK: - Cell Height
+        var h: CGFloat = 0
+        for cell in tableView.visibleCells {
+            h += cell.bounds.height
+            print("loop: \(h)")
+        }
+        print("total h : \(h)")
     }
     
     func setupView() {
@@ -51,6 +64,11 @@ extension TableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TableViewCell
         cell.setTitleLabel = datas[indexPath.row]
+        
+        // MARK: - Cell Height
+        let cellHeight = cell.bounds.height
+        print(cellHeight)
+        
         return cell
     }
 }
@@ -60,6 +78,7 @@ extension TableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+//        return indexPath.row / 2 == 1 ? 100 : 200
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
