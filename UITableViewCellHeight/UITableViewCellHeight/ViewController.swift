@@ -9,14 +9,15 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    let tableView = TableViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tableViewController = TableViewController()
-        present(tableViewController, animated: true, completion: nil)
-        
+        view.addSubview(tableView.view)
+        tableView.view.frame = view.frame
     }
 
-
+ 
 }
 
